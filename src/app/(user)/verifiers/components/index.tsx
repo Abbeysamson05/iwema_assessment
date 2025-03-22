@@ -32,11 +32,13 @@ const Verifiers: React.FC = () => {
     <section>
       <div className="flex items-center justify-between gap-4 mb-8 w-full">
         <div className="me-auto">
-          <SelectFilter
-            list={verifierSelectList}
-            setFilter={setSelectVerifierFilter}
-            placeholder="All"
-          />
+          <div className="w-[212px]">
+            <SelectFilter
+              list={verifierSelectList}
+              setFilter={setSelectVerifierFilter}
+              placeholder="All"
+            />
+          </div>
         </div>
         <InputFilter setQuery={setSearchVerifierFilter} />
         <Button className="text-sm font-normal" size="lg">

@@ -10,10 +10,27 @@ import { useState } from "react";
 const VerifiersTable: React.FC = () => {
   const pageSize = 10;
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageCount, setPageCount] = useState<string>("");
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
   const onPageChange = (page: number) => {
     setCurrentPage(page);
   };
 
+  const pageList = [
+    {
+      text: "10",
+      value: "10",
+    },
+    {
+      text: "20",
+      value: "20",
+    },
+    {
+      text: "30",
+      value: "30",
+    },
+  ];
   const cellRenderers = {
     firstName: (item: VerifiersData) => <p>{item.firstName}</p>,
     lastName: (item: VerifiersData) => <p>{item.lastName}</p>,
@@ -62,10 +79,14 @@ const VerifiersTable: React.FC = () => {
         tableData={verifierData}
         currentPage={currentPage}
         onPageChange={onPageChange}
-        totalPages={Math.ceil(verifierData.length / pageSize)}
+        totalPages={Math.ceil(30 / pageSize)}
         cellRenderers={cellRenderers}
         columnOrder={columnOrder}
         columnLabels={columnLabels}
+        setPage={setPageCount}
+        pageList={pageList}
+        selectedIds={selectedIds}
+        setSelectedIds={setSelectedIds}
       />
     </>
   );

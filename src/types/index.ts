@@ -16,14 +16,15 @@ export interface DataItem {
 
 export interface ITableProps<T extends DataItem> {
   tableData: T[];
-  currentPage?: number;
-  totalPages?: number;
-  onPageChange?: (page: number) => void;
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
   statusKey?: keyof T;
   onRowClick?: (item: T) => void;
 }
 
 export interface VerifiersData extends DataItem {
+  id: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;

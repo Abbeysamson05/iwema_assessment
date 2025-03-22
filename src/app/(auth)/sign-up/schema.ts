@@ -2,7 +2,13 @@ import { z } from "zod";
 
 export const signupSchema = z
   .object({
-    businessName: z.string().min(2, "Invalid name provided"),
+    businessName: z.string().min(2, "Business name should be greater than 2"),
+    houseNumber: z.string(),
+    street: z.string().min(2, "Street should be greater than 2"),
+    state: z.string({
+      required_error: "Please select a country.",
+    }),
+    city: z.string().min(2, "City should be greater than 2"),
     contactName: z.string().min(2, "Invalid name provided"),
     businessCategory: z
       .string({

@@ -10,47 +10,45 @@ export function Pagination({
   const pageNumbers = getPageNumbers(currentPage, totalPages);
 
   return (
-    <div className="flex items-center justify-between py-3">
-      <div className="flex items-center justify-between">
-        <Button
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          variant="ghost"
-          className="bg-transparent p-0"
-        >
-          Previous
-        </Button>
-        <div className="flex items-center gap-1">
-          {pageNumbers.map((pageNumber, index) => (
-            <React.Fragment key={index}>
-              {pageNumber === null ? (
-                <span className="px-2 py-1 text-[#707476]">...</span>
-              ) : (
-                <Button
-                  onClick={() => onPageChange(pageNumber as number)}
-                  className={`${
-                    currentPage === pageNumber
-                      ? "text-white font-gilroy-regular"
-                      : "text-[#707476] bg-white"
-                  } h-4 w-4 rounded-md`}
-                  variant={currentPage === pageNumber ? "ghost" : "default"}
-                  size="xl"
-                >
-                  {pageNumber}
-                </Button>
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-        <Button
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="bg-transparent p-0"
-          variant="ghost"
-        >
-          Next
-        </Button>
+    <div className="flex items-center justify-between gap-4">
+      <Button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        variant="ghost"
+        className="bg-transparent p-0 text-[11px]  font-normal"
+        size={"xl"}
+      >
+        Previous
+      </Button>
+      <div className="flex items-center gap-2">
+        {pageNumbers.map((pageNumber, index) => (
+          <React.Fragment key={index}>
+            {pageNumber === null ? (
+              <span className="px-2 py-1 text-[#707476]">...</span>
+            ) : (
+              <div
+                onClick={() => onPageChange(pageNumber as number)}
+                className={`${
+                  currentPage === pageNumber
+                    ? "text-[#039BF0]"
+                    : "text-[#707476] bg-white"
+                } rounded-md font-medium cursor-pointer text-[11px]`}
+              >
+                {pageNumber}
+              </div>
+            )}
+          </React.Fragment>
+        ))}
       </div>
+      <Button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="bg-transparent p-0  text-[11px] font-normal"
+        variant="ghost"
+        size={"xl"}
+      >
+        Next
+      </Button>
     </div>
   );
 }

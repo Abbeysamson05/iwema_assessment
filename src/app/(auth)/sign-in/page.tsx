@@ -15,8 +15,15 @@ import { useForm } from "react-hook-form";
 import { loginSchema, LoginSchemaType } from "./schema";
 import Link from "next/link";
 import { IWemaIcon } from "../../../../public/icons";
+import { ROUTES } from "@/constants/routes";
+import { useStore } from "@/zustand/store";
+import { mockApi } from "@/service/mock-api";
+import { showErrorAlert, showSuccessAlert } from "@/lib/utils";
+import Storage from "@/lib/storage";
 
 export default function LoginPage() {
+  const { usersData } = useStore((state) => state);
+  const { login } = mockApi;
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -27,6 +34,15 @@ export default function LoginPage() {
 
   async function onSubmit(values: LoginSchemaType) {
     console.warn(values);
+    login({ userObj: values, usersData }).then((res) => {
+      if (res.success) {
+        showSuccessAlert(res?.message);
+        Storage.set("token", res?.userId);
+        window.location.href = ROUTES.USER.VERIFIERS;
+      } else {
+        showErrorAlert(res?.message || "Invalid Credentials");
+      }
+    });
   }
 
   return (
@@ -41,7 +57,9 @@ export default function LoginPage() {
             className="px-[1rem] py-[10px]"
             asChild
           >
-            <Link href="/sign-up">Sign Up</Link>
+            <Link href={`${ROUTES.AUTH.SIGNUP}?tab=business-information`}>
+              Sign Up
+            </Link>
           </Button>
         </div>
       </div>

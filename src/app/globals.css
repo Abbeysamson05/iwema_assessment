@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 * {
@@ -6,6 +8,7 @@
 
 body {
   background-color: #f5f6f8;
+  font-family: "Inter", sans-serif;
 }
 
 @custom-variant dark (&:is(.dark *));
